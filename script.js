@@ -22,7 +22,7 @@ optionbtn3.className = "optionsButtons";
 let optionbtn4 = document.createElement("button");
 optionbtn4.className = "optionsButtons";
 var questionNumber = 0;
-var start = 30;
+var start = 60;
 let confirmationLine = document.createElement("div");
 
 var confirmation = "";
