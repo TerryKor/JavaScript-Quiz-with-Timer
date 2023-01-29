@@ -12,7 +12,6 @@ let highScoresEl = document.getElementById("highScores");
 let timerEl = document.getElementById("timer");
 let questionEl = document.getElementById("question");
 let optionsEl = document.getElementById("options");
-
 let optionbtn1 = document.createElement("button");
 optionbtn1.className = "optionsButtons";
 let optionbtn2 = document.createElement("button");
@@ -21,18 +20,20 @@ let optionbtn3 = document.createElement("button");
 optionbtn3.className = "optionsButtons";
 let optionbtn4 = document.createElement("button");
 optionbtn4.className = "optionsButtons";
+
 var questionNumber = 0;
+
+var theTimer;
 var start = 60;
+
 let confirmationLine = document.createElement("div");
-
 var confirmation = "";
-
 let confirmationEl = document.createElement("h3");
 confirmationEl.id = "confirmationText";
 
 let resultPageEl = document.getElementById("resultPage");
 let resultEl1 = document.createElement("h1");
-resultEl1.id = "AllDoneP"
+resultEl1.id = "AllDoneP";
 let resultEl2 = document.createElement("h2");
 let resultEl3 = document.createElement("h3");
 let intputEl = document.createElement("input");
@@ -41,26 +42,26 @@ let submitBtnEl = document.createElement("button");
 submitBtnEl.id = "submitBtn";
 let resultInitals = document.createElement("div");
 resultInitals.className = "resultInitials";
+
 var score = 0;
+
 let finalPageEl = document.getElementById("finalPage");
-let scoreLineEl = document.createElement("div")
-   scoreLineEl.id = "scoreLine";
-let highScoresParagraphEl = document.createElement("h2")
-  highScoresParagraphEl.id = "highScoresParagraph";
+let scoreLineEl = document.createElement("div");
+scoreLineEl.id = "scoreLine";
+let highScoresParagraphEl = document.createElement("h2");
+highScoresParagraphEl.id = "highScoresParagraph";
 let goBackBtn = document.createElement("button");
-  goBackBtn.className = "finalPageBttns"
+goBackBtn.className = "finalPageBttns";
 let clearHighScoresBtn = document.createElement("button");
-clearHighScoresBtn.className = "finalPageBttns"
-
-
+clearHighScoresBtn.className = "finalPageBttns";
 
 // function running introduction page
 let StarterPage = function () {
   quizPageEl.style.visibility = "hidden";
   introEl1.textContent = "Quiz";
   introEl2.textContent = "Coding challenge";
-  introEl3.textContent = "Test your knowledge of JavaScript with a multiple choice quiz.";
-  introEl4.textContent = "NOTE: you have 60 seconds to answer 5 questions, 1 second equals 1 point, if your answer is wrong you lose 5 points, correct answers do not add points, remaing seconds is your final score .";
+  introEl3.textContent ="Test your knowledge of JavaScript with a multiple choice quiz.";
+  introEl4.textContent ="NOTE: you have 60 seconds to answer 5 questions, 1 second equals 1 point, if your answer is wrong you lose 5 points, correct answers do not add points, remaing seconds is your final score .";
   introEl5.textContent = "Good Luck!";
   startBttnEl.textContent = "START";
 
@@ -91,7 +92,8 @@ let questions = [
     answer: "const",
   },
   {
-    question:"Which function is used to serialize an object into a JSON string in Javascript?",
+    question:
+      "Which function is used to serialize an object into a JSON string in Javascript?",
     options: ["stringify()", "parse()", "convert()", "all of the above"],
     answer: "stringify()",
   },
@@ -128,11 +130,11 @@ function showQuestions() {
   }
 }
 
-function showOptions(itterable) {
-  optionbtn1.textContent = questions[itterable].options[0];
-  optionbtn2.textContent = questions[itterable].options[1];
-  optionbtn3.textContent = questions[itterable].options[2];
-  optionbtn4.textContent = questions[itterable].options[3];
+function showOptions(iterable) {
+  optionbtn1.textContent = questions[iterable].options[0];
+  optionbtn2.textContent = questions[iterable].options[1];
+  optionbtn3.textContent = questions[iterable].options[2];
+  optionbtn4.textContent = questions[iterable].options[3];
 
   optionsEl.appendChild(optionbtn1);
   optionsEl.appendChild(optionbtn2);
@@ -150,12 +152,12 @@ function runTimer() {
     timerEl.innerText = "Timer: " + start.toString();
     if (start <= end) {
       window.clearInterval(theTimer);
-      
+
       showResultsPage();
     }
   }
 
-theTimer = window.setInterval(doThis, 1000);
+  theTimer = window.setInterval(doThis, 1000);
   console.log("timer starts");
 }
 
@@ -164,7 +166,9 @@ function runQuiz() {
   hideStarterPage();
   showQuizPage();
 }
-
+// function to check if user clicked options matching correct answer,
+//and providing confirmation of picked option "correct or wrong"
+// if picked option does not mathces correct answer then 5 seconds subtracted
 function checkedOption(event) {
   let buttonClicked = event.target.textContent;
   //console.log(buttonClicked);
@@ -190,7 +194,6 @@ function checkedOption(event) {
     console.log("checking condition");
     confirmationEl.textContent = confirmation;
     confirmationLine.className = "line";
-   
   }
 
   showQuestions();
@@ -211,77 +214,74 @@ function showResultsPage() {
   resultInitals.appendChild(intputEl);
   resultInitals.appendChild(submitBtnEl);
   resultPageEl.appendChild(resultInitals);
-  
+
   resultPageEl.appendChild(confirmationLine);
   resultPageEl.appendChild(confirmationEl);
-  
 }
+
+// function to store user's initials and score to local storage
 function submitFunc() {
- console.log(intputEl.value)
- localStorage.setItem(intputEl.value, start.toString())
- console.log({...localStorage})
- showHighScorePage()
+  console.log(intputEl.value);
+  localStorage.setItem(intputEl.value, start.toString());
+  console.log({ ...localStorage });
+  showHighScorePage();
 }
 
-function showHighScorePage(){
-    resultPageEl.style.display = "none"
-    var keyList = Object.keys(localStorage)
-    var dataMap = new Map();
-    keyList.forEach((key)=>{
-        dataMap.set(localStorage.getItem(key),key);
-    });
-    console.log(dataMap);
-    dataMap.forEach((key, value)=>{
-        console.log(key, value)
-        var dumpP = document.createElement('p')
-        dumpP.id = "dumpP"
-        dumpP.textContent = `${key}: ${value}`
-        scoreLineEl.appendChild(dumpP)
-    })
-    goBackBtn.textContent = "Go Back"
-    clearHighScoresBtn.textContent = "Clear High Scores"
-    highScoresParagraphEl.textContent = "High Scores"
-    ///////////
-    var highScoresPageBtnsEl = document.createElement("div");
-    highScoresPageBtnsEl.id = "highScoresPageBtns";
-    highScoresPageBtnsEl.appendChild(goBackBtn);
-    highScoresPageBtnsEl.appendChild(clearHighScoresBtn)
-    finalPageEl.appendChild(highScoresPageBtnsEl)
-    ///////////
-    finalPageEl.appendChild(highScoresParagraphEl)
-    finalPageEl.appendChild(scoreLineEl)
-    finalPageEl.appendChild(highScoresPageBtnsEl)
-    // finalPageEl.appendChild(goBackBtn)
-    // finalPageEl.appendChild(clearHighScoresBtn)
+
+function showHighScorePage() {
+  quizPageEl.style.display = "none";
+  resultPageEl.style.display = "none";
+// created Object with keys to get data out of local storage
+  var keyList = Object.keys(localStorage);
+  var dataMap = new Map();
+  // forEach works like a for loop,
+  keyList.forEach((key) => {
+    dataMap.set(localStorage.getItem(key), key);
+  });
+  console.log(dataMap);
+  // var index is used to number items of data for each user 
+  var index = 0;
+  dataMap.forEach((key, value) => {
+    console.log(key, value);
+    index++;
+    var dumpP = document.createElement("p");
+    dumpP.id = "dumpP";
+    // put variables, keys and vlue into string to dsiplay at final page 
+    dumpP.textContent = `${index}. ${key}: ${value}`;
+    scoreLineEl.appendChild(dumpP);
+  });
+  goBackBtn.textContent = "Go Back";
+  clearHighScoresBtn.textContent = "Clear High Scores";
+  highScoresParagraphEl.textContent = "High Scores";
+
+  var highScoresPageBtnsEl = document.createElement("div");
+  highScoresPageBtnsEl.id = "highScoresPageBtns";
+  highScoresPageBtnsEl.appendChild(goBackBtn);
+  highScoresPageBtnsEl.appendChild(clearHighScoresBtn);
+  finalPageEl.appendChild(highScoresPageBtnsEl);
+
+  finalPageEl.appendChild(highScoresParagraphEl);
+  finalPageEl.appendChild(scoreLineEl);
+  finalPageEl.appendChild(highScoresPageBtnsEl);
 }
-//////////////////
- function clearStorage() {
-    
-     console.log("clear high scores button clicked");
-    localStorage.clear();
- }
 
-
-// function goBackToStarterPage(){
-//     console.log("go back button clicked")
-//     quizPageEl.style.visibility = "visible";
-//     StarterPage();
-// }
-var goBackToStarterPage = function() {
-	location.reload();
-	};
-
-
-////////////////
+function clearStorage() {
+  console.log("clear high scores button clicked");
+  localStorage.clear();
+}
+//function reloading quiz to introduction page
+var goBackToStarterPage = function () {
+  location.reload();
+};
 
 optionsEl.addEventListener("click", checkedOption);
 
 startBttnEl.addEventListener("click", runQuiz);
 
-submitBtnEl.addEventListener("click",submitFunc);
+submitBtnEl.addEventListener("click", submitFunc);
 
-////////////////
-goBackBtn.addEventListener("click",goBackToStarterPage);
+goBackBtn.addEventListener("click", goBackToStarterPage);
 
-clearHighScoresBtn.addEventListener("click",clearStorage);
-// ///////////////
+clearHighScoresBtn.addEventListener("click", clearStorage);
+
+highScoresEl.addEventListener("click", showHighScorePage);
