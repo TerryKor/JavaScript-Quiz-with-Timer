@@ -48,9 +48,9 @@ let scoreLineEl = document.createElement("div")
 let highScoresParagraphEl = document.createElement("h2")
   highScoresParagraphEl.id = "highScoresParagraph";
 let goBackBtn = document.createElement("button");
-  goBackBtn.className = "goBackBtn"
+  goBackBtn.className = "finalPageBttns"
 let clearHighScoresBtn = document.createElement("button");
-clearHighScoresBtn.className = "clearScoreBtn"
+clearHighScoresBtn.className = "finalPageBttns"
 
 
 
@@ -60,7 +60,7 @@ let StarterPage = function () {
   introEl1.textContent = "Quiz";
   introEl2.textContent = "Coding challenge";
   introEl3.textContent = "Test your knowledge of JavaScript with a multiple choice quiz.";
-  introEl4.textContent = "Rules: you have 60 seconds to answer 5 questions, 1 second equals 1 point, if your answer is wrong you lose 5 points, correct answers do not add points, remaing seconds is your final score .";
+  introEl4.textContent = "NOTE: you have 60 seconds to answer 5 questions, 1 second equals 1 point, if your answer is wrong you lose 5 points, correct answers do not add points, remaing seconds is your final score .";
   introEl5.textContent = "Good Luck!";
   startBttnEl.textContent = "START";
 
@@ -255,11 +255,11 @@ function showHighScorePage(){
     // finalPageEl.appendChild(clearHighScoresBtn)
 }
 //////////////////
-// function clearStorage() {
+ function clearStorage() {
     
-//     console.log("clear high scores button clicked");
-//     localStorage.clear();
-// }
+     console.log("clear high scores button clicked");
+    localStorage.clear();
+ }
 
 
 // function goBackToStarterPage(){
@@ -283,5 +283,5 @@ submitBtnEl.addEventListener("click",submitFunc);
 ////////////////
 goBackBtn.addEventListener("click",goBackToStarterPage);
 
-// clearHighScoresBtn.addEventListener("click",clearStorage);
+clearHighScoresBtn.addEventListener("click",clearStorage);
 // ///////////////

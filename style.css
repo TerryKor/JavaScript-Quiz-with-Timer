@@ -122,7 +122,6 @@ margin-top: 10%;
 }
 
 #scoreLine{
-/* background-color: rgb(183, 132, 232); */
 padding: 1%;
 height: auto;
 width: 20%;
@@ -140,7 +139,7 @@ font-size: 125%;
 }
 
 
-.goBackBtn{
+.finalPageBttns{
 
     background-color: rgb(119, 50, 168);
     padding: 0.5%;
@@ -152,29 +151,16 @@ font-size: 125%;
     border-radius: 12px;
 
 }
-.clearScoreBtn{
-    background-color: rgb(119, 50, 168);
-    padding: 0.5%;
-    margin: 1%;
-    border: none;
-    font-weight: bold;
-    font-size: 110%;
-    color: rgb(238, 228, 228);
-    border-radius: 12px;
-}
 
 
-.goBackBtn:hover{
+
+.finalPageBttns:hover{
     background-color: rgb(192, 63, 232) ;
     color: rgb(195, 245, 242);
     cursor: pointer;
 
 }
-.clearScoreBtn:hover{
-    background-color: rgb(192, 63, 232) ;
-    color: rgb(195, 245, 242);
-    cursor: pointer;
-}
+
 .line{
     
     width: 100%;
