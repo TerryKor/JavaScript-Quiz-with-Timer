@@ -26,10 +26,13 @@ var start = 30;
 let confirmationLine = document.createElement("div");
 
 var confirmation = "";
+
 let confirmationEl = document.createElement("h3");
+confirmationEl.id = "confirmationText";
 
 let resultPageEl = document.getElementById("resultPage");
 let resultEl1 = document.createElement("h1");
+resultEl1.id = "AllDoneP"
 let resultEl2 = document.createElement("h2");
 let resultEl3 = document.createElement("h3");
 let intputEl = document.createElement("input");
@@ -45,9 +48,10 @@ let scoreLineEl = document.createElement("div")
 let highScoresParagraphEl = document.createElement("h2")
   highScoresParagraphEl.id = "highScoresParagraph";
 let goBackBtn = document.createElement("button");
-  goBackBtn.className = "optionsButtons"
+  goBackBtn.className = "goBackBtn"
 let clearHighScoresBtn = document.createElement("button");
-clearHighScoresBtn.className = "optionsButtons"
+clearHighScoresBtn.className = "clearScoreBtn"
+
 
 
 // function running introduction page
@@ -55,10 +59,8 @@ let StarterPage = function () {
   quizPageEl.style.visibility = "hidden";
   introEl1.textContent = "Quiz";
   introEl2.textContent = "Coding challenge";
-  introEl3.textContent =
-    "Test your knowledge of JavaScript with a multiple choice quiz.";
-  introEl4.textContent =
-    "Rules: you have 60 seconds to answer 5 questions, 1 second equals 1 point, if your answer is wrong you lose 5 points, correct answers do not add points, remaing seconds is your final score .";
+  introEl3.textContent = "Test your knowledge of JavaScript with a multiple choice quiz.";
+  introEl4.textContent = "Rules: you have 60 seconds to answer 5 questions, 1 second equals 1 point, if your answer is wrong you lose 5 points, correct answers do not add points, remaing seconds is your final score .";
   introEl5.textContent = "Good Luck!";
   startBttnEl.textContent = "START";
 
@@ -89,20 +91,13 @@ let questions = [
     answer: "const",
   },
   {
-    question:
-      "Which function is used to serialize an object into a JSON string in Javascript?",
+    question:"Which function is used to serialize an object into a JSON string in Javascript?",
     options: ["stringify()", "parse()", "convert()", "all of the above"],
     answer: "stringify()",
   },
   {
-    question:
-      "Which of the following will write the message 'Hello World!' in an alert box?",
-    options: [
-      "alertBox('Hello World!')",
-      " alert(Hello World)",
-      "msgAlert('Hello World!')",
-      "alert('Hello World!')",
-    ],
+    question:"Which of the following will write the message 'Hello World!' in an alert box?",
+    options: ["alertBox('Hello World!')"," alert(Hello World)","msgAlert('Hello World!')","alert('Hello World!')",],
     answer: "alert('Hello World!')",
   },
 ];
@@ -201,7 +196,7 @@ function checkedOption(event) {
   showQuestions();
 }
 function showResultsPage() {
-    window.clearInterval(theTimer);
+  window.clearInterval(theTimer);
   quizPageEl.style.display = "none";
   let finalTime = start.toString();
   resultEl1.textContent = "All done!";
@@ -231,44 +226,52 @@ function submitFunc() {
 function showHighScorePage(){
     resultPageEl.style.display = "none"
     var keyList = Object.keys(localStorage)
-
     var dataMap = new Map();
     keyList.forEach((key)=>{
         dataMap.set(localStorage.getItem(key),key);
     });
-
     console.log(dataMap);
-
-
     dataMap.forEach((key, value)=>{
         console.log(key, value)
         var dumpP = document.createElement('p')
+        dumpP.id = "dumpP"
         dumpP.textContent = `${key}: ${value}`
         scoreLineEl.appendChild(dumpP)
     })
     goBackBtn.textContent = "Go Back"
     clearHighScoresBtn.textContent = "Clear High Scores"
     highScoresParagraphEl.textContent = "High Scores"
+    ///////////
+    var highScoresPageBtnsEl = document.createElement("div");
+    highScoresPageBtnsEl.id = "highScoresPageBtns";
+    highScoresPageBtnsEl.appendChild(goBackBtn);
+    highScoresPageBtnsEl.appendChild(clearHighScoresBtn)
+    finalPageEl.appendChild(highScoresPageBtnsEl)
+    ///////////
     finalPageEl.appendChild(highScoresParagraphEl)
     finalPageEl.appendChild(scoreLineEl)
-    finalPageEl.appendChild(goBackBtn)
-    finalPageEl.appendChild(clearHighScoresBtn)
+    finalPageEl.appendChild(highScoresPageBtnsEl)
+    // finalPageEl.appendChild(goBackBtn)
+    // finalPageEl.appendChild(clearHighScoresBtn)
 }
 //////////////////
-function clearStorage() {
+// function clearStorage() {
     
-    console.log("clear high scores button clicked");
-    localStorage.clear();
-}
+//     console.log("clear high scores button clicked");
+//     localStorage.clear();
+// }
 
-clearStorage();
 
-function goBackToStarterPage(){
-    console.log("go back button clicked")
-    StarterPage();
-}
+// function goBackToStarterPage(){
+//     console.log("go back button clicked")
+//     quizPageEl.style.visibility = "visible";
+//     StarterPage();
+// }
+var goBackToStarterPage = function() {
+	location.reload();
+	};
 
-goBackToStarterPage()
+
 ////////////////
 
 optionsEl.addEventListener("click", checkedOption);
@@ -280,5 +283,5 @@ submitBtnEl.addEventListener("click",submitFunc);
 ////////////////
 goBackBtn.addEventListener("click",goBackToStarterPage);
 
-clearHighScoresBtn.addEventListener("click",clearStorage);
-///////////////
+// clearHighScoresBtn.addEventListener("click",clearStorage);
+// ///////////////
