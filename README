@@ -1,6 +1,6 @@
-#Quiz with timer, topic JavaScript.
+# Quiz with timer, topic JavaScript.
 
-##Discription
+## Discription
 
 Quiz with timer was created to use and practice new skills I learnt at bootcamp. In this application I mostly used JavaScript. 
 It helped me to change content of HTML dynamically, to add content and hide certain elements when user interacts with the page.
@@ -10,16 +10,16 @@ Instructions for taking quiz can be found on intruduction page. Once user clicks
 a question and 4 options are displayed. When user clicks one of the options, then below options user can see if chosen option was correct/wrong, then user is presented with next question and options.
 If user picks incorrect answer then 5 seconds get substracted from timer but if user picks correct answer then time is not substracted,remaining seconds is user's finall score. Once all questions and options are displayed, then another page displayed notifying user that the quiz is done and provides user input to enter initials. When initials have been submitted then app displayes page with high scores and a button option to return to introduction page as well as a button to clear high scores.
 
-##Instalation
+## Instalation
 
 Please click link below:
 
 https://terrykor.github.io/JavaScript-Quiz-with-Timer/
 
-##Screenshot
+## Screenshot
 
 https://github.com/TerryKor/JavaScript-Quiz-with-Timer/blob/main/Assets/screenshot.png
 
-##License
+## License
 
 Please refer to the LICENSE in the repo
